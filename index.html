@@ -26,6 +26,61 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+  .share-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+  }
+
+  .share-button, .share-options a {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+  }
+
+  .share-button:hover,
+  .share-options a:hover {
+    transform: translateY(-5px);
+  }
+
+  .share-button img {
+    width: 60%;
+  }
+
+  .share-options {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .share-options a img {
+    width: 65%;
+  }
+
+  .bounce {
+    animation: bounce 1.5s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
   </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex flex-col items-center">
@@ -208,6 +263,53 @@
       }
     }
   </script>
+  <div class="share-container">
+  <div class="share-options" id="share-options">
+    <a class="bounce" onclick="shareTo('whatsapp')" title="WhatsApp">
+      <img src="whatsapp.svg" alt="WhatsApp">
+    </a>
+    <a class="bounce" onclick="shareTo('facebook')" title="Facebook">
+      <img src="fb.svg" alt="Facebook">
+    </a>
+    <a class="bounce" onclick="shareTo('instagram')" title="Instagram">
+      <img src="ins.svg" alt="Instagram">
+    </a>
+    <a class="bounce" onclick="shareTo('telegram')" title="Telegram">
+      <img src="telegram.svg" alt="Telegram">
+    </a>
+  </div>
+
+  <button class="share-button" onclick="toggleShare()">
+    <img src="share.svg" alt="Share">
+  </button>
+  </div>
+  <script>
+  const shareOptions = document.getElementById("share-options");
+  const shareUrl = encodeURIComponent("https://yourwebsite.com"); // Replace with your actual site
+
+  function toggleShare() {
+    shareOptions.style.display = (shareOptions.style.display === "flex") ? "none" : "flex";
+  }
+
+  function shareTo(platform) {
+    let url = "";
+    switch (platform) {
+      case "whatsapp":
+        url = `https://wa.me/?text=${shareUrl}`;
+        break;
+      case "facebook":
+        url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+        break;
+      case "instagram":
+        alert("Instagram does not support direct web sharing. Share manually.");
+        return;
+      case "telegram":
+        url = `https://t.me/share/url?url=${shareUrl}`;
+        break;
+    }
+    if (url) window.open(url, "_blank");
+  }
+</script>
 </body>
 </html>
 
