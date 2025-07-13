@@ -1,0 +1,13 @@
+{
+  "name": "sudoku-solver-proxy",
+  "version": "1.0.0",
+  "description": "A Vercel proxy for Sudoku Solver backend.",
+  "main": "api/solve.js",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+}
