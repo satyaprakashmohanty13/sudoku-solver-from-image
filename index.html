@@ -164,8 +164,8 @@
     const message = document.getElementById('message');
     const downloadBtn = document.getElementById('download-btn');
 
-    // Define the API endpoint for the Sudoku solver
-    const API_URL = "https://satyaprakashmohanty13-sudoku-solver-ocr.hf.space/solve"; // Ensure this URL is correct
+    // Define the API endpoint for the Sudoku solver (now pointing to your Vercel serverless function)
+    const API_URL = "/api/solve"; 
 
     // Event listener for click on the drop zone to trigger file input
     dropZone.addEventListener('click', () => fileInput.click());
@@ -302,15 +302,18 @@
         url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
         break;
       case "instagram":
-        alert("Instagram does not support direct web sharing. Share manually.");
+        // Instagram does not support direct web sharing from a URL
+        // You might consider a custom modal or just a message here
+        alert("Instagram does not support direct web sharing. Please share manually from the app.");
         return;
       case "telegram":
         url = `https://t.me/share/url?url=${shareUrl}`;
         break;
+      default:
+        return;
     }
     if (url) window.open(url, "_blank");
   }
 </script>
 </body>
 </html>
-
